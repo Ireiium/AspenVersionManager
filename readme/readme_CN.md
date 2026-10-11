@@ -13,7 +13,7 @@ Aspen 版本管理器，用于切换 Aspen Plus 模型文件的默认打开版�
 
 目前仅支持 Aspen Plus 的 `.apw`、`.apwz` 和 `.bkp` 文件。
 
-![版本管理界面](shortcut.png)
+![版本管理界面](screenshotCN.png)
 
 ## 功能
 
@@ -73,7 +73,7 @@ HKEY_LOCAL_MACHINE\Software\Classes\文件类型标识\shell\open\command
 程序还会读取扩展名与 ProgID 的映射、CurVer 重定向，以及以下位置中的 ProgId 和 Hash，用于检查关联变化：
 
 ```text
-HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\<扩展名>\UserChoice
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\FileExts\扩展名\UserChoice
 ```
 
 这些查询项保持原值。程序只写入已有的打开命令，不新建关联，也不修改 UserChoice、扩展名对应的 ProgID 或 COM 注册信息。含 DDE、COM 等特殊打开机制的关联，或来源无法确认的命令，会被拒绝修改。

@@ -13,7 +13,7 @@ This applies to opening model files by double-clicking them or from external pro
 
 Currently supports Aspen Plus only, for `.apw`, `.apwz`, and `.bkp` files.
 
-![Version management interface](readme/shortcut.png)
+![Version management interface](readme/screenshotEng.png)
 
 ## Features
 
@@ -24,10 +24,10 @@ Currently supports Aspen Plus only, for `.apw`, `.apwz`, and `.bkp` files.
 
 ## Usage
 
-1. Start the application and view installed versions and current associations on the “版本管理” (Version Management) page.
-2. If the version you need is missing, click “手动添加” (Add Manually) and select its installation directory or executable.
+1. Start the application and view installed versions and current associations on the “Version Management” page.
+2. If the version you need is missing, click “Add Manually” and select its installation directory or executable.
 3. Select the target version, apply the change, and wait for the result.
-4. To restore the previous configuration, open “设置” (Settings), click “恢复配置” (Restore Configuration), and select a backup.
+4. To restore the previous configuration, open “Settings”, click “Restore Configuration”, and select a backup.
 
 Changing system-wide associations usually requires administrator privileges. If access is denied, run the application as administrator. Files that are not yet associated with Aspen Plus must first be associated through Windows Default Apps.
 
