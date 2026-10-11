@@ -1,0 +1,6 @@
+.qtcreator/
+.vs/
+buildtool/
+build/
+*.user
+.clang-format
