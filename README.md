@@ -24,10 +24,10 @@ Currently supports Aspen Plus only, for `.apw`, `.apwz`, and `.bkp` files.
 
 ## Usage
 
-1. Start the application and view installed versions and current associations on the “Version Management” page.
-2. If the version you need is missing, click “Add Manually” and select its installation directory or executable.
-3. Select the target version, apply the change, and wait for the result.
-4. To restore the previous configuration, open “Settings”, click “Restore Configuration”, and select a backup.
+1. Start the application and view installed versions and current associations on the “Versions” page.
+2. If the version you need is missing, click “Add version” and select its installation directory or executable.
+3. Click “Set as default” for the target version and wait for the result.
+4. To restore the previous configuration, open “Settings”, click “Restore configuration”, and select a backup.
 
 Changing system-wide associations usually requires administrator privileges. If access is denied, run the application as administrator. Files that are not yet associated with Aspen Plus must first be associated through Windows Default Apps.
 
