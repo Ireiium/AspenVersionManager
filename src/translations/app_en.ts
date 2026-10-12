@@ -4,6 +4,108 @@
   <context>
     <name>QObject</name>
     <message>
+      <source>程序路径必须是没有引号的绝对路径。</source>
+      <translation>The executable path must be absolute and must not contain quotation marks.</translation>
+    </message>
+    <message>
+      <source>关于</source>
+      <translation>About</translation>
+    </message>
+    <message>
+      <source>版本 %1</source>
+      <translation>Version %1</translation>
+    </message>
+    <message>
+      <source>配置双击 Aspen Plus 模型文件时使用的默认版本。</source>
+      <translation>Choose which Aspen Plus version opens model files when you double-click them.</translation>
+    </message>
+    <message>
+      <source>独立工具，非 AspenTech 官方产品。</source>
+      <translation>Independent tool. Not an official AspenTech product.</translation>
+    </message>
+    <message>
+      <source>本项目采用 MIT 许可证。Copyright (c) 2026 Ireiium</source>
+      <translation>Licensed under the MIT License. Copyright (c) 2026 Ireiium</translation>
+    </message>
+    <message>
+      <source>打开许可证位置</source>
+      <translation>Show license file</translation>
+    </message>
+    <message>
+      <source>使用许可证：%1</source>
+      <translation>License: %1</translation>
+    </message>
+    <message>
+      <source>第三方开源信息</source>
+      <translation>Third-party software</translation>
+    </message>
+    <message>
+      <source>打开第三方许可证文件夹</source>
+      <translation>Open third-party licenses folder</translation>
+    </message>
+    <message>
+      <source>Qt源码</source>
+      <translation>Qt source code</translation>
+    </message>
+    <message>
+      <source>获取 QtBase 6.8.3 源码</source>
+      <translation>Download QtBase 6.8.3 source</translation>
+    </message>
+    <message>
+      <source>获取 QtTranslations 6.8.3 源码</source>
+      <translation>Download QtTranslations 6.8.3 source</translation>
+    </message>
+    <message>
+      <source>无法打开链接</source>
+      <translation>Could not open link</translation>
+    </message>
+    <message>
+      <source>请使用系统浏览器打开以下地址：
+%1</source>
+      <translation>Open this address in your browser:
+%1</translation>
+    </message>
+    <message>
+      <source>许可证文件缺失</source>
+      <translation>License file missing</translation>
+    </message>
+    <message>
+      <source>没有找到本项目的 MIT 许可证：
+%1</source>
+      <translation>The application's MIT license was not found:
+%1</translation>
+    </message>
+    <message>
+      <source>无法打开许可证位置</source>
+      <translation>Could not show license file</translation>
+    </message>
+    <message>
+      <source>无法在文件资源管理器中选中：
+%1</source>
+      <translation>Could not select this file in File Explorer:
+%1</translation>
+    </message>
+    <message>
+      <source>第三方许可证目录缺失</source>
+      <translation>Third-party licenses folder missing</translation>
+    </message>
+    <message>
+      <source>没有找到随包许可证目录：
+%1</source>
+      <translation>The third-party licenses folder was not found:
+%1</translation>
+    </message>
+    <message>
+      <source>无法打开许可证目录</source>
+      <translation>Could not open licenses folder</translation>
+    </message>
+    <message>
+      <source>无法打开：
+%1</source>
+      <translation>Could not open:
+%1</translation>
+    </message>
+    <message>
       <source>CurVer 类重定向无效或存在循环，已停止修改。</source>
       <translation>The CurVer class redirection is invalid or cyclic. No changes were made.</translation>
     </message>
@@ -524,8 +626,8 @@ Matching HKCU class exists: %4</translation>
       <translation>System</translation>
     </message>
     <message>
-      <source>显示语言</source>
-      <translation>Display language</translation>
+      <source>语言</source>
+      <translation>Language</translation>
     </message>
     <message>
       <source>写入后的注册表命令发生变化：%1\%2

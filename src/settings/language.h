@@ -16,6 +16,8 @@ class language : public QObject
     public:
     static language& instance();
     ~language() override;
+    langMode mode() const;
+    static langMode systemMode(const QString& name);
     void setMode(langMode mode);
 
     signals:
@@ -31,7 +33,6 @@ class language : public QObject
     bool ready = false;
     QTranslator appTexts;
     QTranslator qtTexts;
-    static langMode systemMode(const QString& name);
     void apply();
 };
 

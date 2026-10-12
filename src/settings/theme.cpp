@@ -49,19 +49,17 @@ void theme::setMode(themeMode value)
 bool theme::nativeEventFilter(const QByteArray&, void* message, qintptr*)
 {
     const MSG* event = static_cast<MSG*>(message);
-    if (event->message == WM_SETTINGCHANGE || event->message == WM_THEMECHANGED ||
-        event->message == WM_DWMCOLORIZATIONCOLORCHANGED)
+    if ((event->message == WM_SETTINGCHANGE || event->message == WM_THEMECHANGED ||
+         event->message == WM_DWMCOLORIZATIONCOLORCHANGED) &&
+        !queued)
     {
-        if (!queued)
-        {
-            queued = true;
-            QTimer::singleShot(0, this,
-                               [this]
-                               {
-                                   queued = false;
-                                   apply();
-                               });
-        }
+        queued = true;
+        QTimer::singleShot(0, this,
+                           [this]
+                           {
+                               queued = false;
+                               apply();
+                           });
     }
     return false;
 }

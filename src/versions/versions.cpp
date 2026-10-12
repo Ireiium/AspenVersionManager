@@ -6,6 +6,7 @@
 #include <QRegularExpression>
 #include <QSettings>
 #include <QSet>
+#include <algorithm>
 
 QString productLabel(const QString& text)
 {

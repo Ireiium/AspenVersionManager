@@ -62,9 +62,10 @@ bool startApp()
             return false;
         }
         const DWORD error = GetLastError();
-        dialog.setError(error == ERROR_CANCELLED
-                            ? QObject::tr("已取消管理员授权。可以重试，或点击“继续”。")
-                            : QObject::tr("无法以管理员启动（错误 %1）。可以重试，或点击“继续”。").arg(error));
+        dialog.setError(
+            error == ERROR_CANCELLED
+                ? QObject::tr("已取消管理员授权。可以重试，或点击“继续”。")
+                : QObject::tr("无法以管理员启动（错误 %1）。可以重试，或点击“继续”。").arg(error));
     }
 }
 } // namespace
@@ -77,7 +78,7 @@ int main(int argc, char* argv[])
     QCoreApplication::setApplicationVersion(AVM_VERSION);
     app.setWindowIcon(QIcon(":/images/logo.png"));
     QApplication::setStyle("Fusion");
-    language::instance().setMode(langMode::chinese);
+    language::instance();
     app.setFont(QFont("Microsoft YaHei UI", uiSize::bodyFont));
     theme colors;
     // Closing the startup prompt must not queue a quit before the main window exists.

@@ -6,6 +6,7 @@
 #include <QLocale>
 #include <QPointer>
 #include <QSettings>
+#include <QStringList>
 #include <QVariantMap>
 
 namespace
@@ -74,6 +75,11 @@ language::~language()
 langMode language::systemMode(const QString& name)
 {
     return QLocale(name).language() == QLocale::English ? langMode::english : langMode::chinese;
+}
+
+langMode language::mode() const
+{
+    return selected;
 }
 
 void language::setMode(langMode mode)

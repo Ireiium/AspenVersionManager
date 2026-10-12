@@ -19,10 +19,12 @@
 #include <QPlainTextEdit>
 #include <algorithm>
 #include <QListWidget>
+#include <QMap>
 #include <QScrollArea>
 #include <QSettings>
 #include <QStackedWidget>
 #include <QStyle>
+#include <QTextOption>
 #include <QUrl>
 #include <QtConcurrent>
 #include <QEvent>
@@ -192,6 +194,13 @@ void mainWindow::initSettings()
     themeBox->setCurrentIndex(static_cast<int>(colors.mode()));
     body->addWidget(textLabel("外观", "heading", page));
     body->addWidget(new settingRow("应用主题", {}, themeBox, page));
+
+    languageBox = new comboBox(colors, page);
+    languageBox->setObjectName("languageBox");
+    languageBox->addItem("中文", static_cast<int>(langMode::chinese));
+    languageBox->addItem("English", static_cast<int>(langMode::english));
+    languageBox->setCurrentIndex(languageBox->findData(static_cast<int>(language::instance().mode())));
+    body->addWidget(new settingRow("语言", {}, languageBox, page));
     body->addSpacing(uiSize::space16);
 
     actionButton* openDir = new actionButton("打开目录", false, page);
@@ -225,6 +234,12 @@ void mainWindow::initSettings()
     pages->addWidget(settingsPage);
     connect(themeBox, &QComboBox::currentIndexChanged, this,
             [this](int index) { colors.setMode(static_cast<themeMode>(index)); });
+    connect(languageBox, &QComboBox::currentIndexChanged, this,
+            [this](int index)
+            {
+                language::instance().setMode(static_cast<langMode>(languageBox->itemData(index).toInt()));
+            });
+    connect(&language::instance(), &language::changed, this, &mainWindow::updateText);
     connect(&colors, &theme::changed, this,
             [this]
             {
@@ -243,6 +258,8 @@ void mainWindow::updateText()
     themeBox->setItemText(0, QObject::tr("跟随系统"));
     themeBox->setItemText(1, QObject::tr("浅色"));
     themeBox->setItemText(2, QObject::tr("深色"));
+    QSignalBlocker langGuard(languageBox);
+    languageBox->setCurrentIndex(languageBox->findData(static_cast<int>(language::instance().mode())));
 }
 
 void mainWindow::changeEvent(QEvent* event)

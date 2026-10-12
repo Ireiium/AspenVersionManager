@@ -1,5 +1,6 @@
 #include "aboutPage.h"
 #include "settings/theme.h"
+#include "settings/language.h"
 #include "ui/dialogs.h"
 #include "ui/widgets.h"
 
@@ -21,6 +22,10 @@ namespace
 QLabel* aboutText(const QString& text, const QString& role, QWidget* parent)
 {
     QLabel* label = new QLabel(text, parent);
+    if (!text.isEmpty())
+    {
+        bindText(label, text);
+    }
     label->setProperty("role", role);
     label->setTextFormat(Qt::PlainText);
     label->setWordWrap(true);
@@ -136,8 +141,12 @@ void aboutPage::initHeader(QVBoxLayout* body)
     QVBoxLayout* titleLayout = new QVBoxLayout;
     titleLayout->setSpacing(uiSize::space4);
     titleLayout->addWidget(aboutText("AspenVersionManager", "heading", this));
-    QLabel* versionLabel = aboutText(QString("版本 %1").arg(AVM_VERSION), "muted", this);
+    QLabel* versionLabel = aboutText({}, "muted", this);
     versionLabel->setObjectName("appVersion");
+    const auto updateVersion = [versionLabel]
+    { versionLabel->setText(QObject::tr("版本 %1").arg(AVM_VERSION)); };
+    updateVersion();
+    connect(&language::instance(), &language::changed, versionLabel, updateVersion);
     titleLayout->addWidget(versionLabel);
 
     QHBoxLayout* headerLayout = new QHBoxLayout;
@@ -166,15 +175,22 @@ void aboutPage::addEntry(QVBoxLayout* body, const QString& name, const QUrl& url
     webLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Preferred);
     webLabel->setTextInteractionFlags(Qt::TextBrowserInteraction);
     webLabel->setOpenExternalLinks(false);
-    const auto updateLink = [webLabel, url]
+    const QString address = url.toString().toHtmlEscaped();
+    const auto updateLink = [webLabel, address]
     {
-        const QString address = url.toString().toHtmlEscaped();
         webLabel->setText(
             QString("<a href=\"%1\" style=\"color:%2\">%1</a>").arg(address, theme::tokens().focus.name()));
     };
     updateLink();
     body->addWidget(webLabel);
-    body->addWidget(aboutText("使用许可证：" + license, {}, this));
+    QLabel* licenseLabel = aboutText({}, {}, this);
+    const auto updateLicense = [licenseLabel, license]
+    {
+        licenseLabel->setText(QObject::tr("使用许可证：%1").arg(license));
+    };
+    updateLicense();
+    connect(&language::instance(), &language::changed, licenseLabel, updateLicense);
+    body->addWidget(licenseLabel);
     body->addWidget(aboutText(note, "muted", this));
     body->addSpacing(uiSize::space16);
 
@@ -230,7 +246,8 @@ void aboutPage::openWeb(const QUrl& url)
 {
     if (!QDesktopServices::openUrl(url))
     {
-        showMessage(this, "无法打开链接", "请使用系统浏览器打开以下地址：\n" + url.toString(), {}, true);
+        showMessage(this, "无法打开链接",
+                    QObject::tr("请使用系统浏览器打开以下地址：\n%1").arg(url.toString()), {}, true);
     }
 }
 
@@ -240,13 +257,15 @@ void aboutPage::openMit()
     if (!QFileInfo(path).isFile())
     {
         showMessage(this, "许可证文件缺失",
-                    "没有找到本项目的 MIT 许可证：\n" + QDir::toNativeSeparators(path), {}, true);
+                    QObject::tr("没有找到本项目的 MIT 许可证：\n%1").arg(QDir::toNativeSeparators(path)), {},
+                    true);
         return;
     }
     if (!selectFile(path))
     {
         showMessage(this, "无法打开许可证位置",
-                    "无法在文件资源管理器中选中：\n" + QDir::toNativeSeparators(path), {}, true);
+                    QObject::tr("无法在文件资源管理器中选中：\n%1").arg(QDir::toNativeSeparators(path)), {},
+                    true);
     }
 }
 
@@ -256,11 +275,13 @@ void aboutPage::openLicenses()
     if (!QFileInfo(path).isDir())
     {
         showMessage(this, "第三方许可证目录缺失",
-                    "没有找到随包许可证目录：\n" + QDir::toNativeSeparators(path), {}, true);
+                    QObject::tr("没有找到随包许可证目录：\n%1").arg(QDir::toNativeSeparators(path)), {},
+                    true);
         return;
     }
     if (!QDesktopServices::openUrl(QUrl::fromLocalFile(path)))
     {
-        showMessage(this, "无法打开许可证目录", "无法打开：\n" + QDir::toNativeSeparators(path), {}, true);
+        showMessage(this, "无法打开许可证目录",
+                    QObject::tr("无法打开：\n%1").arg(QDir::toNativeSeparators(path)), {}, true);
     }
 }

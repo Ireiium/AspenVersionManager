@@ -56,6 +56,7 @@ class mainWindow : public QMainWindow
     QPushButton* addBtn;
     QPushButton* restoreBtn;
     comboBox* themeBox;
+    comboBox* languageBox;
     QPointer<detailDialog> details;
     void initWindow();
     void initVersions();
